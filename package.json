@@ -3,9 +3,11 @@
     "version": "1.0.0",
     "scripts": {
         "setup": "npm install && cd server && npm install && cd ../frontend && npm install",
-        "dev": "concurrently \"cd server && npm run dev\" \"cd frontend && npm run dev\""
+        "dev": "concurrently \"cd server && npm run dev\" \"cd frontend && npm run dev\"",
+        "build": "cd frontend && npm install --include=dev && npm run build"
     },
     "dependencies": {
-        "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2",
+        "next": "14.2.3"
     }
 }
