@@ -1,0 +1,61 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+  products  Product[]
+  settings  Settings?
+
+  @@map("organizations")
+}
+
+model User {
+  id             String       @id @default(uuid())
+  organizationId String
+  email          String       @unique
+  passwordHash   String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@map("users")
+}
+
+model Product {
+  id                  String       @id @default(uuid())
+  organizationId      String
+  name                String
+  sku                 String
+  description         String?
+  quantity            Int          @default(0)
+  costPrice           Float        @default(0)
+  sellingPrice        Float        @default(0)
+  lowStockThreshold   Int?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  organization        Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, sku])
+  @@map("products")
+}
+
+model Settings {
+  id                       String       @id @default(uuid())
+  organizationId           String       @unique
+  defaultLowStockThreshold Int          @default(10)
+  createdAt                DateTime     @default(now())
+  updatedAt                DateTime     @updatedAt
+  organization             Organization @relation(fields: [organizationId], references: [id])
+
+  @@map("settings")
+}
