@@ -11,7 +11,7 @@ export default function SettingsPage() {
     useEffect(() => {
         const fetchSettings = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/settings', { credentials: 'include' })
+                const res = await fetch('/api/settings', { credentials: 'include' })
                 if (res.ok) {
                     const data = await res.json()
                     setThreshold(data.defaultLowStockThreshold)
@@ -29,7 +29,7 @@ export default function SettingsPage() {
         e.preventDefault()
         setMsg('')
         try {
-            const res = await fetch('http://localhost:5000/api/settings', {
+            const res = await fetch('/api/settings', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ defaultLowStockThreshold: threshold }),

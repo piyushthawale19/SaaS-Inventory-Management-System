@@ -12,7 +12,7 @@ export default function DashboardPage() {
     useEffect(() => {
         const fetchDashboard = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/dashboard', { credentials: 'include' })
+                const res = await fetch('/api/dashboard', { credentials: 'include' })
                 if (res.status === 401) return router.push('/login')
                 const json = await res.json()
                 setData(json)

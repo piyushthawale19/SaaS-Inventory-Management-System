@@ -19,7 +19,7 @@ export default function ProductsPage() {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/products', { credentials: 'include' })
+            const res = await fetch('/api/products', { credentials: 'include' })
             if (!res.ok) throw new Error('Failed to fetch')
             const json = await res.json()
             setProducts(json)
@@ -39,7 +39,7 @@ export default function ProductsPage() {
         setError('')
         const isEdit = !!form.id
         const method = isEdit ? 'PUT' : 'POST'
-        const url = isEdit ? `http://localhost:5000/api/products/${form.id}` : 'http://localhost:5000/api/products'
+        const url = isEdit ? `/api/products/${form.id}` : '/api/products'
 
         try {
             const res = await fetch(url, {
@@ -62,7 +62,7 @@ export default function ProductsPage() {
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this product?')) return
         try {
-            const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+            const res = await fetch(`/api/products/${id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })
@@ -76,7 +76,7 @@ export default function ProductsPage() {
         const newQty = Math.max(0, currentQty + delta)
         setUpdatingId(id)
         try {
-            const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+            const res = await fetch(`/api/products/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quantity: newQty }),

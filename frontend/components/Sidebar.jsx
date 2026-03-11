@@ -15,7 +15,7 @@ export default function Sidebar({ children }) {
     useEffect(() => {
         const fetchMe = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/auth/me', { credentials: 'include' })
+                const res = await fetch('/api/auth/me', { credentials: 'include' })
                 if (res.ok) {
                     const data = await res.json()
                     setUser({
@@ -32,7 +32,7 @@ export default function Sidebar({ children }) {
     }, [])
 
     const handleLogout = async () => {
-        await fetch('http://localhost:5000/api/auth/logout', { method: 'POST', credentials: 'include' })
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
         router.push('/login')
     }
 
