@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Sidebar from '@/components/Sidebar'
 import { useRouter } from 'next/navigation'
-import { Package, Layers, AlertTriangle, ChevronRight, ShoppingCart, Image as ImageIcon } from 'lucide-react'
+import { Package, Layers, AlertTriangle, ChevronRight, Image as ImageIcon } from 'lucide-react'
 
 export default function DashboardPage() {
     const router = useRouter()
@@ -64,10 +64,6 @@ export default function DashboardPage() {
                         <h2 className="text-xl font-bold text-slate-900">Low Stock Alerts</h2>
                         <p className="text-sm text-slate-400 mt-1 font-medium">Inventory items currently below their safety threshold</p>
                     </div>
-                    <button className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-hover shadow-lg shadow-blue-100 transition-all">
-                        <ShoppingCart className="w-4 h-4" />
-                        Create Restock Order
-                    </button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
